@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/Kellojo/Stylized-Kelp-Docs.git"
   },
-  "keywords": [],
+  "keywords": ["documentation", "docs", "markdown", "offline", "static site generator", "ssg", "offline", "single file", "nodejs", "embedded"],
   "author": "",
   "license": "MIT",
   "type": "commonjs",
