@@ -8,10 +8,7 @@
     "start": "node ./src/server.js",
     "build": "node ./src/build.js"
   },
-  "bin": {
-    "start": "./src/server.js",
-    "build": "./src/build.js"
-  },
+  "bin": "src/cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kellojo/Stylized-Kelp-Docs.git"
