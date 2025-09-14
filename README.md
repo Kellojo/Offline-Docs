@@ -1,6 +1,7 @@
 # Offline-Docs
 A simple Node.js package that you can use to create offline product documentation using Markdown. The tool embeds all content into a single output file.
 
+![Example Docs Page](img/example.png)
 
 ## Features:
 - Embedds images as base64
