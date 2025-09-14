@@ -100,3 +100,7 @@ nav ul {
     background-color: transparent;
     cursor: default;
 }
+
+md-block img {
+    border-radius: 8px;
+}
