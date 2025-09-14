@@ -67,12 +67,13 @@
         buildNavBar(pages);
 
         const setSelectedNavItem = (item) => {
+            const newContent = item.getAttribute('content');
+            const bIsNewItemValid = newContent != null;
+            if (!bIsNewItemValid) return;
+
             const selectedItem = document.querySelector('.navBarItemSelected');
             if (selectedItem) selectedItem.classList.remove('navBarItemSelected');
             item.classList.add('navBarItemSelected');
-
-            const newContent = item.getAttribute('content');
-            if (newContent == null) return;
 
             const pageContent = document.getElementById('pageContent');
             pageContent.innerHTML = newContent;

@@ -77,7 +77,7 @@ nav ul {
     margin-bottom: 4px;
 }
 
-.navBarItem:hover {
+.navBarItem:not(.submenuHeader):hover {
     background-color: hsl(222 23% 20% / 1);
 }
 
@@ -92,16 +92,11 @@ nav ul {
 
     border-bottom: 1px solid var(--pico-secondary-border);
     border-radius: 0px;
+    cursor: default;
 }
 
 .navBarItem.submenuHeader:not(:first-child) {
     margin-top: 1rem;
-}
-
-
-.navBarItem.submenuHeader:hover {
-    background-color: transparent;
-    cursor: default;
 }
 
 md-block img {
