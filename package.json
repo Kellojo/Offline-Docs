@@ -1,8 +1,8 @@
 {
-  "name": "stylized-kelp-docs",
+  "name": "offline-docs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/build.js",
   "scripts": {
     "test": "",
     "start": "node ./src/server.js",
