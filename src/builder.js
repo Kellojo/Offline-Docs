@@ -6,7 +6,7 @@ const MarkdownIt = require("markdown-it");
 
 
 const getStylesheets = () => {
-    const cssFiles = ["./src/page/style.css", "./src/page/pico.min.css", "./src/page/pico.colors.min.css"];
+    const cssFiles = ["./src/page/style.css", "./src/page/pico.min.css"];
     return cssFiles.map(file => {
         const style = readPackageFileSync(file);
         return `<style>\n${style}\n</style>`;

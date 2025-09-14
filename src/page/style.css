@@ -18,6 +18,7 @@ header {
     padding: 0 !important;
     border-bottom: 1px solid var(--pico-muted-border-color);
     backdrop-filter: blur(1rem);
+    background-color: #13171fbd;
     position: sticky;
     top: 0;
 }
@@ -86,7 +87,7 @@ nav ul {
 }
 
 .navBarItemSelected {
-    color: var(--pico-contrast);
+    color: var(--pico-primary);
     background-color: hsl(222 23% 20% / 1);
 }
 
