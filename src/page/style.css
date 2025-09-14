@@ -76,6 +76,7 @@ nav ul {
     width: 100%;
     cursor: pointer;
     border-radius: 8px;
+        color: var(--pico-h3-color);
 }
 
 .navBarItem:not(:last-child) {
@@ -93,7 +94,7 @@ nav ul {
 
 .navBarItem.submenuHeader {
     font-weight: bold;
-    color: var(--pico-primary-inverse);
+    color: var(--pico-h2-color);
 
     border-bottom: 1px solid var(--pico-secondary-border);
     border-radius: 0px;
