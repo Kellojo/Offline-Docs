@@ -8,9 +8,14 @@ const MarkdownIt = require("markdown-it");
 const getStylesheets = () => {
     const cssFiles = ["./src/page/style.css", "./src/page/pico.min.css", "./src/page/pico.colors.min.css"];
     return cssFiles.map(file => {
-        const style = fs.readFileSync(file, 'utf-8');
+        const style = readPackageFileSync(file);
         return `<style>\n${style}\n</style>`;
     }).join('\n');
+}
+
+const readPackageFileSync = (filePath) => {
+    const localPath = path.join(__dirname, '..', filePath);
+    return fs.readFileSync(localPath, 'utf-8');
 }
 
 const readMdFiles = (dir) => {
@@ -104,9 +109,9 @@ const parsePage = (file) => {
 }
 
 const buildDocs = (options) => {
-    const config = yaml.parse(fs.readFileSync('./config.yaml', 'utf-8'));
+    const config = yaml.parse(readPackageFileSync('./config.yaml'));
 
-    const template = fs.readFileSync("./src/page/index.html", "utf-8");
+    const template = readPackageFileSync("./src/page/index.html");
     const pages = JSON.stringify(readMdFiles("./docs"), null, 4);
     const output = mustache.render(template, { 
         title: config.title, 
