@@ -5,6 +5,10 @@
     --maxContentWidth: 1500px;
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
 body {
     overflow: overlay;
 }
