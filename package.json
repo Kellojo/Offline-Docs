@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "",
     "start": "node ./src/server.js",
     "build": "node ./src/build.js"
   },
