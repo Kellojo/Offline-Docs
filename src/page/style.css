@@ -1,4 +1,3 @@
-
 :root {
     --headerHeight: 100px;
     --navBarWidth: 350px;
@@ -53,7 +52,7 @@ header {
 
 nav {
     background-color: hsl(222 23% 15% / 1);
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
@@ -76,7 +75,7 @@ nav ul {
     width: 100%;
     cursor: pointer;
     border-radius: 8px;
-        color: var(--pico-h3-color);
+    color: var(--pico-h3-color);
 }
 
 .navBarItem:not(:last-child) {
