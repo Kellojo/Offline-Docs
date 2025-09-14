@@ -11,16 +11,16 @@
   "bin": "src/cli.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kellojo/Stylized-Kelp-Docs.git"
+    "url": "git+https://github.com/Kellojo/Offline-Docs.git"
   },
   "keywords": ["documentation", "docs", "markdown", "offline", "static site generator", "ssg", "offline", "single file", "nodejs", "embedded"],
   "author": "",
   "license": "MIT",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Kellojo/Stylized-Kelp-Docs/issues"
+    "url": "https://github.com/Kellojo/Offline-Docs/issues"
   },
-  "homepage": "https://github.com/Kellojo/Stylized-Kelp-Docs#readme",
+  "homepage": "https://github.com/Kellojo/Offline-Docs#readme",
   "dependencies": {
     "connect-livereload": "^0.6.1",
     "express": "^5.1.0",
