@@ -7,7 +7,7 @@ const MarkdownIt = require("markdown-it");
 
 const getPicoStylesheet = (theme) => {
     if (!theme) return `./src/page/pico/pico.min.css`;
-    return `./src/page/pico/pico-${theme}.min.css`;
+    return `./src/page/pico/pico.${theme}.min.css`;
 }
 
 const getStylesheets = (config) => {
