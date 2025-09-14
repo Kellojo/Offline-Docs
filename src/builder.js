@@ -5,8 +5,17 @@ const yaml = require('yaml');
 const MarkdownIt = require("markdown-it");
 
 
-const getStylesheets = () => {
-    const cssFiles = ["./src/page/style.css", "./src/page/pico.min.css"];
+const getPicoStylesheet = (theme) => {
+    if (!theme) return `./src/page/pico/pico.min.css`;
+    return `./src/page/pico/pico-${theme}.min.css`;
+}
+
+const getStylesheets = (config) => {
+    const picoTheme = config.theme || 'cyan';
+    const picoStylesheet = getPicoStylesheet(picoTheme);
+
+
+    const cssFiles = ["./src/page/style.css", picoStylesheet];
     return cssFiles.map(file => {
         const style = readPackageFileSync(file);
         return `<style>\n${style}\n</style>`;
@@ -118,7 +127,7 @@ const buildDocs = (options) => {
     const output = mustache.render(template, { 
         title: config.title, 
         content: pages,
-        style: getStylesheets(),
+        style: getStylesheets(config),
     });
 
     if (options.saveToDisk) {
