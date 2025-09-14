@@ -69,7 +69,9 @@ const parsePage = (file) => {
         }
     }
 
-    const md = new MarkdownIt();
+    const md = new MarkdownIt({
+        linkify: true,
+    });
     parsedMarkdown = md.parse(content);
 
     parsedMarkdown.forEach(token => {
