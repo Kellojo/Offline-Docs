@@ -41,8 +41,6 @@
                 return pages[a].order - pages[b].order;
             });
 
-
-
             sortedEntries.forEach(key => {
                 const page = pages[key];
 
@@ -52,6 +50,7 @@
                     if (parent !== null) li.classList.add('subNavBarItem');
                     li.textContent = page.title;
                     li.setAttribute('content', page.content);
+                    li.setAttribute('title', page.title);
                     navBar.appendChild(li);
                 } else {
                     const submenuHeader = document.createElement('li');
@@ -74,9 +73,11 @@
             const selectedItem = document.querySelector('.navBarItemSelected');
             if (selectedItem) selectedItem.classList.remove('navBarItemSelected');
             item.classList.add('navBarItemSelected');
+        
 
             const pageContent = document.getElementById('pageContent');
             pageContent.innerHTML = newContent;
+            window.location.hash = item.getAttribute('title');
         }
 
         const pageContent = document.getElementById('pageContent');
@@ -87,7 +88,22 @@
             });
         });
 
-        navBarItems[0].click();
+
+        const showInitialPage = () => {
+            const hash = decodeURIComponent(window.location.hash.substring(1));
+
+            if (hash) {
+                const targetItem = Array.from(navBarItems).find(item => item.getAttribute('title') === hash);
+                if (targetItem) {
+                    setSelectedNavItem(targetItem);
+                    targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+            }
+
+            navBarItems[0].click();
+        }
+        showInitialPage();
 
     </script>
 
