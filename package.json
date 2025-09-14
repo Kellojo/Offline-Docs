@@ -1,6 +1,6 @@
 {
   "name": "offline-md-docs",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A simple Node.js package that you can use to create offline product documentation using Markdown. The tool embeds all content into a single output file.",
   "main": "src/build.js",
   "scripts": {
@@ -13,7 +13,18 @@
     "type": "git",
     "url": "git+https://github.com/Kellojo/Offline-Docs.git"
   },
-  "keywords": ["documentation", "docs", "markdown", "offline", "static site generator", "ssg", "offline", "single file", "nodejs", "embedded"],
+  "keywords": [
+    "documentation",
+    "docs",
+    "markdown",
+    "offline",
+    "static site generator",
+    "ssg",
+    "offline",
+    "single file",
+    "nodejs",
+    "embedded"
+  ],
   "author": "",
   "license": "MIT",
   "type": "commonjs",
