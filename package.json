@@ -1,0 +1,34 @@
+{
+  "name": "stylized-kelp-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "build": "node ./src/build.js"
+  },
+  "bin": {
+    "start": "./src/server.js",
+    "build": "./src/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kellojo/Stylized-Kelp-Docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Kellojo/Stylized-Kelp-Docs/issues"
+  },
+  "homepage": "https://github.com/Kellojo/Stylized-Kelp-Docs#readme",
+  "dependencies": {
+    "connect-livereload": "^0.6.1",
+    "express": "^5.1.0",
+    "livereload": "^0.10.3",
+    "markdown-it": "^14.1.0",
+    "mustache": "^4.2.0",
+    "yaml": "^2.8.1"
+  }
+}

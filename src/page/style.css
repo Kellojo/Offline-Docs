@@ -1,0 +1,103 @@
+
+:root {
+    --headerHeight: 100px;
+    --navBarWidth: 350px;
+    --maxContentWidth: 1500px;
+}
+
+body {
+    overflow: auto;
+    overflow: overlay;
+}
+
+
+header {
+    padding: 0 !important;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+    backdrop-filter: blur(1rem);
+    position: sticky;
+    top: 0;
+}
+
+
+.headerContent {
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    max-width: var(--maxContentWidth);
+    height: var(--headerHeight);
+    margin: 0 auto;
+    display: grid;
+    align-items: center;
+    height: 100%;
+}
+
+
+.headerContent h1 {
+    margin: 0px;
+    font-size: 1.5rem;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: minmax(var(--navBarWidth), var(--navBarWidth)) auto;
+    gap: 2rem;
+    max-width: var(--maxContentWidth);
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+
+nav {
+    background-color: hsl(222 23% 15% / 1);
+    padding: 1rem 0.5rem;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    height: fit-content;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin: 0 !important;
+}
+
+.navBarItem {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.navBarItem:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.navBarItem:hover {
+    background-color: hsl(222 23% 20% / 1);
+}
+
+.navBarItemSelected {
+    color: var(--pico-contrast);
+    background-color: hsl(222 23% 20% / 1);
+}
+
+.navBarItem.submenuHeader {
+    font-weight: bold;
+    color: var(--pico-primary-inverse);
+
+    border-bottom: 1px solid var(--pico-secondary-border);
+    border-radius: 0px;
+}
+
+.navBarItem.submenuHeader:not(:first-child) {
+    margin-top: 1rem;
+}
+
+
+.navBarItem.submenuHeader:hover {
+    background-color: transparent;
+    cursor: default;
+}
