@@ -3,6 +3,7 @@ const path = require('path');
 const mustache = require('mustache');
 const yaml = require('yaml');
 const MarkdownIt = require("markdown-it");
+const hljs = require('highlight.js');
 
 class DocsBuilder {
 
@@ -12,10 +13,8 @@ class DocsBuilder {
         config.theme = config.theme || 'cyan';
 
         this.config = config;
+        this.usedCodeLanguages = new Set();
     }
-
-
-
 
     build(options) {
         const template = this.readPackageFileSync("./src/page/index.html");
@@ -32,7 +31,6 @@ class DocsBuilder {
 
         return output;
     }
-
 
     readMdFiles(dir) {
         let mdContent = {};
@@ -85,9 +83,7 @@ class DocsBuilder {
             }
         }
 
-        const md = new MarkdownIt({
-            linkify: true,
-        });
+        const md = this.getMarkdownItInstance();
         const parsedMarkdown = md.parse(content);
 
         parsedMarkdown.forEach(token => {
@@ -115,7 +111,7 @@ class DocsBuilder {
             }
         });
 
-        content = md.renderer.render(parsedMarkdown, {});
+        content = md.renderer.render(parsedMarkdown, md.options);
 
 
         return {
@@ -130,9 +126,21 @@ class DocsBuilder {
 
     getStylesheets() {
         const picoStylesheet = this.getPicoStylesheet(this.config.theme);
+        const cssFiles = new Set(["./src/page/style.css", picoStylesheet]);
 
-        const cssFiles = ["./src/page/style.css", picoStylesheet];
-        return cssFiles.map(file => {
+        this.usedCodeLanguages.forEach(lang => {
+            let langStylesheet = `./node_modules/highlight.js/styles/${lang}.min.css`;
+
+            // use fallback if the specific language stylesheet doesn't exist
+            if (!this.packageFileExistsSync(langStylesheet)) {
+                cssFiles.add(`./node_modules/highlight.js/styles/github-dark.min.css`);
+                return;
+            }
+
+            cssFiles.add(langStylesheet);
+        });
+
+        return Array.from(cssFiles).map(file => {
             const style = this.readPackageFileSync(file);
             return `<style>\n${style}\n</style>`;
         }).join('\n');
@@ -149,9 +157,33 @@ class DocsBuilder {
         return `./src/page/pico/pico.${theme}.min.css`;
     }
 
+    getMarkdownItInstance() {
+        return new MarkdownIt({
+            linkify: true,
+            highlight: this.syntaxHighlight.bind(this),
+        });
+    }
+
+    syntaxHighlight(code, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                this.usedCodeLanguages.add(lang);
+                return hljs.highlight(code, { language: lang }).value;
+            } catch (error) {
+                console.error(`Error highlighting code for language: ${lang}`, error);
+            }
+        }
+        return ''; // use external default escaping
+    }
+
     readPackageFileSync(filePath) {
         const localPath = path.join(__dirname, '..', filePath);
         return fs.readFileSync(localPath, 'utf-8');
+    }
+
+    packageFileExistsSync(filePath) {
+        const localPath = path.join(__dirname, '..', filePath);
+        return fs.existsSync(localPath);
     }
 }
 
