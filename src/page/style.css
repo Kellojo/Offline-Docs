@@ -1,7 +1,8 @@
 :root {
-    --headerHeight: 100px;
+    --headerHeight: 70px;
     --navBarWidth: 350px;
     --maxContentWidth: 1500px;
+    --pagePadding: 2rem;
 }
 
 html {
@@ -10,6 +11,7 @@ html {
 
 body {
     overflow: overlay;
+    scrollbar-color: var(--pico-secondary-border) transparent;
 }
 
 
@@ -27,7 +29,6 @@ header {
     padding: 1rem 2rem;
     box-sizing: border-box;
     max-width: var(--maxContentWidth);
-    height: var(--headerHeight);
     margin: 0 auto;
     display: grid;
     align-items: center;
@@ -46,11 +47,11 @@ header {
     gap: 2rem;
     max-width: var(--maxContentWidth);
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--pagePadding);
 }
 
 
-nav {
+body nav {
     background-color: hsl(222 23% 15% / 1);
     padding: 0.5rem;
     border-radius: 8px;
@@ -58,9 +59,19 @@ nav {
     box-sizing: border-box;
     height: fit-content;
 
+    height: calc(100vh - var(--headerHeight) - var(--pagePadding) * 2);
+    overflow: auto;
     position: sticky;
-    top: var(--headerHeight);
+    top: calc(var(--headerHeight) + var(--pagePadding));
+
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.2s;
 }
+
+body nav:hover {
+    scrollbar-color: var(--pico-secondary-border) transparent;
+}
+
 
 nav ul {
     display: flex;
