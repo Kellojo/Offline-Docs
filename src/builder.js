@@ -129,12 +129,11 @@ class DocsBuilder {
         const cssFiles = new Set(["./src/page/style.css", picoStylesheet]);
 
         this.usedCodeLanguages.forEach(lang => {
-            let langStylesheet = `./node_modules/highlight.js/styles/${lang}.min.css`;
+            let langStylesheet = this.resolveHighlightJsStyleSheet(`./node_modules/highlight.js/styles/${lang}.min.css`);
 
             // use fallback if the specific language stylesheet doesn't exist
-            if (!this.packageFileExistsSync(langStylesheet)) {
-                cssFiles.add(`./node_modules/highlight.js/styles/github-dark.min.css`);
-                return;
+            if (langStylesheet === null) {
+                langStylesheet = this.resolveHighlightJsStyleSheet(`./node_modules/highlight.js/styles/github-dark.min.css`);
             }
 
             cssFiles.add(langStylesheet);
@@ -144,6 +143,20 @@ class DocsBuilder {
             const style = this.readPackageFileSync(file);
             return `<style>\n${style}\n</style>`;
         }).join('\n');
+    }
+
+    /**
+     * Resolves the path to a Highlight.js stylesheet, checking both local and runtime paths.
+     * @param {string} styleSheet 
+     * @returns {string|null}
+     * @public
+     */
+    resolveHighlightJsStyleSheet(styleSheet) {
+        if (this.packageFileExistsSync(styleSheet)) return styleSheet;
+        const runtimeStyleSheet = styleSheet.replace('./node_modules/', '../');
+        if (this.packageFileExistsSync(runtimeStyleSheet)) return runtimeStyleSheet;
+
+        return null;
     }
 
     /**
