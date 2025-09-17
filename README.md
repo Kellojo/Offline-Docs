@@ -49,3 +49,9 @@ Add a metadata.yaml file to your folder, which contains the metadata:
 order: 1
 ---
 ```
+
+## Roadmap
+- Linking between different headings across pages
+- Improved image embedding (only embedd images once)
+- Support infinite nesting (currently only supports folders on the root level
+- Support phones and make the pages more responsive
