@@ -3,10 +3,13 @@ A simple Node.js package that you can use to create offline product documentatio
 
 ![Example Docs Page](img/example.png)
 
+[![CodeQL](https://github.com/Kellojo/Offline-Docs/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Kellojo/Offline-Docs/actions/workflows/github-code-scanning/codeql)
+
 ## Features:
 - Embedds images as base64
 - Embedds your md files
 - Yields a singular .html file as it's output, that is ready for offline use
+- Syntax highlighting
 
 ## Quickstart
 1. Create a new folder and add a config.yaml to it with the following content:
