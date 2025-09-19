@@ -17,8 +17,8 @@ const buildNavBar = (pages, parent = null) => {
             if (parent !== null) li.classList.add('subNavBarItem');
             li.textContent = page.title;
             li.setAttribute('title', page.title);
-            li.setAttribute('pageId', page.id);
-            li.setAttribute('isPage', 'true');
+            li.setAttribute('data-pageId', page.id);
+            li.setAttribute('data-isPage', 'true');
             li.tabIndex = 0;
             navBar.appendChild(li);
         } else {
@@ -49,10 +49,10 @@ const getPageContentById = (id, entries) => {
 }
 
 const setSelectedNavItem = (item) => {
-    const bIsNewItemValid = item.getAttribute('isPage') === 'true';
+    const bIsNewItemValid = item.getAttribute('data-isPage') === 'true';
     if (!bIsNewItemValid) return;
 
-    const pageId = item.getAttribute('pageId');
+    const pageId = item.getAttribute('data-pageId');
     const newContent = getPageContentById(pageId);
 
     const selectedItem = document.querySelector('.navBarItemSelected');
@@ -62,7 +62,7 @@ const setSelectedNavItem = (item) => {
 
     const pageContent = document.getElementById('pageContent');
     pageContent.innerHTML = newContent;
-    window.location.hash = item.getAttribute('pageId');
+    window.location.hash = item.getAttribute('data-pageId');
 
     window.scrollTo(0, 0);
 }
@@ -80,7 +80,7 @@ const showInitialPage = () => {
     const hash = window.location.hash.substring(1);
 
     if (hash) {
-        const targetItem = Array.from(navBarItems).find(item => item.getAttribute('pageId') === hash);
+        const targetItem = Array.from(navBarItems).find(item => item.getAttribute('data-pageId') === hash);
         if (targetItem) {
             setSelectedNavItem(targetItem);
             targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
