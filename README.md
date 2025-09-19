@@ -55,3 +55,4 @@ order: 1
 - Improved image embedding (only embedd images once)
 - Support infinite nesting (currently only supports folders on the root level
 - Support phones and make the pages more responsive
+- Live reload on file change for the local dev server
