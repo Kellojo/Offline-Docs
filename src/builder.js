@@ -4,6 +4,7 @@ const mustache = require('mustache');
 const yaml = require('yaml');
 const MarkdownIt = require("markdown-it");
 const hljs = require('highlight.js');
+const slugify = require('slugify');
 
 class DocsBuilder {
 
@@ -101,7 +102,7 @@ class DocsBuilder {
                                 const base64 = imageData.toString('base64');
                                 const dataUri = `data:image/${ext};base64,${base64}`;
                                 child.attrSet('src', dataUri);
-                                console.log(`Embedded image: ${imagePath}`);
+                                //console.log(`Embedded image: ${imagePath}`);
                             } else {
                                 console.warn(`Image file not found: ${imagePath}`);
                             }
@@ -114,8 +115,10 @@ class DocsBuilder {
         content = md.renderer.render(parsedMarkdown, md.options);
 
 
+        const title = path.basename(file, '.md');
         return {
-            title: path.basename(file, '.md'),
+            id: slugify(title),
+            title: title,
             ... metadata,
             content: content,
             isPage: true,

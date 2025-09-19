@@ -49,26 +49,44 @@
                     li.classList.add('navBarItem');
                     if (parent !== null) li.classList.add('subNavBarItem');
                     li.textContent = page.title;
-                    li.setAttribute('content', page.content);
                     li.setAttribute('title', page.title);
+                    li.setAttribute('pageId', page.id);
+                    li.setAttribute('isPage', 'true');
+                    li.tabIndex = 0;
                     navBar.appendChild(li);
                 } else {
                     const submenuHeader = document.createElement('li');
                     submenuHeader.classList.add('submenuHeader');
                     submenuHeader.classList.add('navBarItem');
+                    submenuHeader.tabIndex = -1;
                     submenuHeader.textContent = page.title;
                     navBar.appendChild(submenuHeader);
                     buildNavBar(page.entries, submenuHeader);
-
                 }
             });
         }
         buildNavBar(pages);
 
+        const getPageContentById = (id, entries) => {
+            entries = entries || pages;
+            for (const key in entries) {
+                const page = entries[key];
+                if (page.isPage && page.id === id) {
+                    return page.content;
+                } else if (!page.isPage && page.entries) {
+                    const content = getPageContentById(id, page.entries);
+                    if (content) return content;
+                }
+            }
+            return null;
+        }
+
         const setSelectedNavItem = (item) => {
-            const newContent = item.getAttribute('content');
-            const bIsNewItemValid = newContent != null;
+            const bIsNewItemValid = item.getAttribute('isPage') === 'true';
             if (!bIsNewItemValid) return;
+
+            const pageId = item.getAttribute('pageId');
+            const newContent = getPageContentById(pageId);
 
             const selectedItem = document.querySelector('.navBarItemSelected');
             if (selectedItem) selectedItem.classList.remove('navBarItemSelected');
@@ -77,7 +95,7 @@
 
             const pageContent = document.getElementById('pageContent');
             pageContent.innerHTML = newContent;
-            window.location.hash = item.getAttribute('title');
+            window.location.hash = item.getAttribute('pageId');
 
             window.scrollTo(0, 0);
         }
@@ -92,10 +110,10 @@
 
 
         const showInitialPage = () => {
-            const hash = decodeURIComponent(window.location.hash.substring(1));
+            const hash = window.location.hash.substring(1);
 
             if (hash) {
-                const targetItem = Array.from(navBarItems).find(item => item.getAttribute('title') === hash);
+                const targetItem = Array.from(navBarItems).find(item => item.getAttribute('pageId') === hash);
                 if (targetItem) {
                     setSelectedNavItem(targetItem);
                     targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
