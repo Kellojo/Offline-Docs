@@ -8,8 +8,15 @@ const slugify = require('slugify');
 
 class DocsBuilder {
 
+
+
     constructor(config) {
-        if (!config) config = yaml.parse(this.readPackageFileSync('./config.yaml'));
+        const configPath = "./config.yaml";
+        if (!fs.existsSync(configPath)) {
+            fs.writeFileSync(configPath, yaml.stringify({ title: "My Documentation" }), 'utf-8');
+        }
+    
+        if (!config) config = yaml.parse(fs.readFileSync(configPath, 'utf-8'));
 
         config.theme = config.theme || 'cyan';
 
@@ -186,7 +193,6 @@ class DocsBuilder {
 
     getExternalLink() {
         const link = this.config.externalLink;
-        console.log("External link config:", link);
         if (link && link.text && link.url) {
             return `<a href="${link.url}" target="_blank" rel="noopener">${link.text}</a>`;
         }
