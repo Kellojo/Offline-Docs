@@ -11,6 +11,7 @@ html {
 
 body {
     overflow: overlay;
+    overflow-x: hidden;
     scrollbar-color: var(--pico-secondary-border) transparent;
 }
 
@@ -49,6 +50,10 @@ header {
     max-width: var(--maxContentWidth);
     margin: 0 auto;
     padding: var(--pagePadding);
+}
+
+main {
+    overflow: hidden;
 }
 
 
@@ -118,4 +123,14 @@ nav ul {
 
 md-block img {
     border-radius: 8px;
+}
+
+md-block code {
+    overflow-x: auto;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.2s;
+}
+
+md-block code:hover {
+    scrollbar-color: var(--pico-secondary-border) transparent;
 }
