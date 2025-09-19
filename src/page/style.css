@@ -33,6 +33,7 @@ header {
     max-width: var(--maxContentWidth);
     margin: 0 auto;
     display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     height: 100%;
 }
@@ -41,6 +42,13 @@ header {
 .headerContent h1 {
     margin: 0px;
     font-size: 1.5rem;
+}
+
+.headerContentRight {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .mainContent {
@@ -93,6 +101,7 @@ nav ul {
     cursor: pointer;
     border-radius: 8px;
     color: var(--pico-h3-color);
+    transition: background-color 0.2s;
 }
 
 .navBarItem:not(:last-child) {

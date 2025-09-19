@@ -25,6 +25,7 @@ class DocsBuilder {
             content: pages,
             style: this.getStylesheets(),
             script: this.getScripts(),
+            externalLink: this.getExternalLink(),
         });
 
         if (options.saveToDisk) {
@@ -148,14 +149,6 @@ class DocsBuilder {
             return `<style>\n${style}\n</style>`;
         }).join('\n');
     }
-    getScripts() {
-        const scriptFiles = new Set(["./src/page/page.js"]);
-
-        return Array.from(scriptFiles).map(file => {
-            const script = this.readPackageFileSync(file);
-            return `<script>\n${script}\n</script>`;
-        }).join('\n');
-    }
 
     /**
      * Resolves the path to a Highlight.js stylesheet, checking both local and runtime paths.
@@ -170,7 +163,7 @@ class DocsBuilder {
 
         return null;
     }
-
+    
     /**
      * Returns the path to the Pico CSS stylesheet based on the theme.
      * @param {string} theme 
@@ -180,6 +173,24 @@ class DocsBuilder {
     getPicoStylesheet(theme) {
         if (!theme) return `./src/page/pico/pico.min.css`;
         return `./src/page/pico/pico.${theme}.min.css`;
+    }
+
+    getScripts() {
+        const scriptFiles = new Set(["./src/page/page.js"]);
+
+        return Array.from(scriptFiles).map(file => {
+            const script = this.readPackageFileSync(file);
+            return `<script>\n${script}\n</script>`;
+        }).join('\n');
+    }
+
+    getExternalLink() {
+        const link = this.config.externalLink;
+        console.log("External link config:", link);
+        if (link && link.text && link.url) {
+            return `<a href="${link.url}" target="_blank" rel="noopener">${link.text}</a>`;
+        }
+        return '';
     }
 
     getMarkdownItInstance() {
