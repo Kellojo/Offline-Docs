@@ -72,6 +72,8 @@ body nav {
 
     scrollbar-color: transparent transparent;
     transition: scrollbar-color 0.2s;
+
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 body nav:hover {
@@ -133,4 +135,8 @@ md-block pre code {
 
 md-block pre code:hover {
     scrollbar-color: var(--pico-secondary-border) transparent;
+}
+
+image {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
