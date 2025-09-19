@@ -24,6 +24,7 @@ class DocsBuilder {
             title: this.config.title,
             content: pages,
             style: this.getStylesheets(),
+            script: this.getScripts(),
         });
 
         if (options.saveToDisk) {
@@ -145,6 +146,14 @@ class DocsBuilder {
         return Array.from(cssFiles).map(file => {
             const style = this.readPackageFileSync(file);
             return `<style>\n${style}\n</style>`;
+        }).join('\n');
+    }
+    getScripts() {
+        const scriptFiles = new Set(["./src/page/page.js"]);
+
+        return Array.from(scriptFiles).map(file => {
+            const script = this.readPackageFileSync(file);
+            return `<script>\n${script}\n</script>`;
         }).join('\n');
     }
 
