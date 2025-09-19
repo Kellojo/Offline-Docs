@@ -27,6 +27,12 @@ To run a local dev server, which shows you a live preview of your docs, run:
 npx offline-md-docs start
 ```
 
+## Building the docs
+To build your documentation, run:
+```
+npx offline-md-docs build
+```
+
 ## Theming
 The builder uses [Pico CSS](https://picocss.com/) under the hood, which allows you to customize the color by providing a predefined scheme, that pico provides.
 You can find an overview over all available color schemes here: https://picocss.com/docs/version-picker
