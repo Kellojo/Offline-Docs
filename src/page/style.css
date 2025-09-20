@@ -71,7 +71,8 @@ main *:focus-visible {
 
 body nav {
     background-color: hsl(222 23% 15% / 1);
-    padding: 0.5rem;
+    border: 0.5rem solid hsl(222 23% 15% / 1);
+    padding-right: 0.5rem;
     border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
