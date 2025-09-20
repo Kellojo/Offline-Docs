@@ -17,3 +17,5 @@ The asset relies on Unitys Visual Effect Graph package. To install the package o
 3. Click play and marvel at the kelp
 
 [Link to another page](#Core-Concepts/CodeTest)
+
+[Link to another page with heading](#Core-Concepts/Understanding-Core-Concepts?h=Kelp-Settings-2)

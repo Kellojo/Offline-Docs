@@ -56,7 +56,19 @@ navBarItems.forEach(item => {
     });
 });
 
-const navigateTo = (pageId) => {
+const getHeadingTarget = (hash) => {
+    if (!hash) return null;
+    if (hash.startsWith('#')) hash = hash.substring(1);
+
+    const parsedUrl = new URL(hash, window.location.origin);
+    const params = new URLSearchParams(parsedUrl.search);
+
+    if (!params.has("h")) return null;
+    return params.get("h");
+}
+
+const navigateTo = (hash) => {
+    const pageId = hash.split('?')[0];
     const page = getPageById(pageId);
     if (!page) return false;
     if (!page.isPage) return false;
@@ -73,7 +85,15 @@ const navigateTo = (pageId) => {
     window.offlineDocsCurrentPage = pageId;
     window.location.hash = `#${pageId}`;
 
-    window.scrollTo(0, 0);
+    const headingTarget = getHeadingTarget(hash);
+    if (headingTarget) {
+        const headingElement = document.getElementById(headingTarget);
+        if (headingElement) {
+            headingElement.scrollIntoView();
+        }
+    } else {
+        window.scrollTo(0, 0);
+    }
 
     console.log('Navigated to page:', pageId);
     return true;

@@ -78,8 +78,13 @@ You can link between different pages by using the following syntax:
 ```
 Where `Core-Concepts/CodeTest` is the slugified path to the page you want to link to.
 
+You can also link to specific headings within a page by appending `?h=Heading-Name` to the URL:
+```
+[Link to another page with heading](#Core-Concepts/Understanding-Core-Concepts?h=Kelp-Settings-2)
+```
+Where `Kelp-Settings-2` is the slugified version of the heading you want to link to.
+
 ## Roadmap
-- Linking between different headings across pages
 - Improved image embedding (only embedd images once)
-- Support infinite nesting (currently only supports folders on the root level
+- Support infinite nesting (currently only supports folders on the root level)
 - Support phones and make the pages more responsive
