@@ -3,13 +3,26 @@ A simple Node.js package that you can use to create offline product documentatio
 
 ![Example Docs Page](img/example.png)
 
-[![CodeQL](https://github.com/Kellojo/Offline-Docs/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Kellojo/Offline-Docs/actions/workflows/github-code-scanning/codeql)
 
-## Features:
-- Embedds images as base64
-- Embedds your md files
-- Yields a singular .html file as it's output, that is ready for offline use
-- Syntax highlighting
+## Table of Contents
+1. [Features](#features)
+2. [Quickstart](#quickstart)
+3. [Running a local dev server](#running-a-local-dev-server)
+4. [Building the docs](#building-the-docs)
+5. [Customization](#customization)
+   - [Theming](#theming)
+   - [Custom Sort Order](#custom-sort-order)
+   - [Linking between pages](#linking-between-pages)
+6. [Roadmap](#roadmap)
+
+
+## Features
+- Yields a singular .html file as it's output, that is ready for offline use (0 dependencies)
+    - Embeds images as base64
+    - Embeds your md files
+- Syntax highlighting for code blocks
+- Supports images and folders
+- Supports linking between different pages
 
 ## Quickstart
 1. Create a new folder and add a config.yaml to it with the following content:
@@ -21,7 +34,7 @@ theme: cyan
 3. Run `npx ...` to open the live preview of your documentation
 4. Once happy, run `npx offline-md-docs build` to build your final html file
 
-## Running a loal dev server
+## Running a local dev server
 To run a local dev server, which shows you a live preview of your docs, run:
 ```
 npx offline-md-docs start
@@ -33,11 +46,13 @@ To build your documentation, run:
 npx offline-md-docs build
 ```
 
-## Theming
+## Customization
+
+### Theming
 The builder uses [Pico CSS](https://picocss.com/) under the hood, which allows you to customize the color by providing a predefined scheme, that pico provides.
 You can find an overview over all available color schemes here: https://picocss.com/docs/version-picker
 
-## Custom Sort Order
+### Custom Sort Order
 Entries (either folders or md files) can have a custom order assigned as follows:
 
 **Markdown Files**
@@ -56,7 +71,7 @@ order: 1
 ---
 ```
 
-## Linking between pages
+### Linking between pages
 You can link between different pages by using the following syntax:
 ```
 [Link to another page](#Core-Concepts/CodeTest)
