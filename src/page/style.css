@@ -70,6 +70,7 @@ main *:focus-visible {
 
 
 body nav {
+    margin-top: var(--pagePadding);
     background-color: hsl(222 23% 15% / 1);
     border: 0.5rem solid hsl(222 23% 15% / 1);
     padding-right: 0.5rem;
