@@ -68,6 +68,8 @@ const getHeadingTarget = (hash) => {
 }
 
 const navigateTo = (hash) => {
+    if (!hash) return false;
+
     const pageId = hash.split('?')[0];
     const page = getPageById(pageId);
     if (!page) return false;
