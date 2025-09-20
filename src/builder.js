@@ -3,6 +3,7 @@ const path = require('path');
 const mustache = require('mustache');
 const yaml = require('yaml');
 const MarkdownIt = require("markdown-it");
+const mdAnchor = require("markdown-it-anchor");
 const hljs = require('highlight.js');
 const slugify = require('slugify');
 
@@ -219,10 +220,16 @@ class DocsBuilder {
     }
 
     getMarkdownItInstance() {
-        return new MarkdownIt({
+        const mdit = new MarkdownIt({
             linkify: true,
             highlight: this.syntaxHighlight.bind(this),
         });
+
+        mdit.use(mdAnchor, {
+            slugify: slugify,
+        });
+
+        return mdit;
     }
 
     syntaxHighlight(code, lang) {

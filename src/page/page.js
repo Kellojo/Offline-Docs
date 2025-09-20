@@ -34,60 +34,60 @@ const buildNavBar = (pages, parent = null) => {
 }
 buildNavBar(pages);
 
-const getPageContentById = (id, entries) => {
+const getPageById = (id, entries) => {
     entries = entries || pages;
     for (const key in entries) {
         const page = entries[key];
         if (page.isPage && page.id === id) {
-            return page.content;
+            return page;
         } else if (!page.isPage && page.entries) {
-            const content = getPageContentById(id, page.entries);
-            if (content) return content;
+            const p = getPageById(id, page.entries);
+            if (p) return p;
         }
     }
     return null;
-}
-
-const setSelectedNavItem = (item) => {
-    const bIsNewItemValid = item.getAttribute('data-isPage') === 'true';
-    if (!bIsNewItemValid) return;
-
-    const pageId = item.getAttribute('data-pageId');
-    const newContent = getPageContentById(pageId);
-
-    const selectedItem = document.querySelector('.navBarItemSelected');
-    if (selectedItem) selectedItem.classList.remove('navBarItemSelected');
-    item.classList.add('navBarItemSelected');
-
-
-    const pageContent = document.getElementById('pageContent');
-    pageContent.innerHTML = newContent;
-    window.location.hash = item.getAttribute('data-pageId');
-
-    window.scrollTo(0, 0);
 }
 
 const pageContent = document.getElementById('pageContent');
 const navBarItems = document.querySelectorAll('.navBarItem');
 navBarItems.forEach(item => {
     item.addEventListener('click', () => {
-        setSelectedNavItem(item);
+        navigateTo(item.getAttribute('data-pageId'));
     });
 });
 
+const navigateTo = (pageId) => {
+    const page = getPageById(pageId);
+    if (!page) return false;
+    if (!page.isPage) return false;
 
-const showInitialPage = () => {
-    const hash = window.location.hash.substring(1);
+    const selectedItem = document.querySelector('.navBarItemSelected');
+    if (selectedItem) selectedItem.classList.remove('navBarItemSelected');
 
-    if (hash) {
-        const targetItem = Array.from(navBarItems).find(item => item.getAttribute('data-pageId') === hash);
-        if (targetItem) {
-            setSelectedNavItem(targetItem);
-            targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-        }
-    }
+    const targetItem = Array.from(navBarItems).find(item => item.getAttribute('data-pageId') === pageId);
+    if (targetItem) targetItem.classList.add('navBarItemSelected');
 
-    navBarItems[0].click();
+    const pageContent = document.getElementById('pageContent');
+    pageContent.innerHTML = page.content;
+
+    window.offlineDocsCurrentPage = pageId;
+    window.location.hash = `#${pageId}`;
+
+    window.scrollTo(0, 0);
+
+    console.log('Navigated to page:', pageId);
+    return true;
 }
-showInitialPage();
+
+// Show initial page based on URL hash
+const hash = window.location.hash.substring(1);
+if (!navigateTo(hash)) 
+    navBarItems[0].click(); // navigate to first page if hash is invalid
+
+// Handle hash changes (e.g. back/forward navigation)
+window.addEventListener('hashchange', (event) => {
+    const hash = window.location.hash.substring(1);
+    if (!hash) return;
+    if (hash === window.offlineDocsCurrentPage) return; // filter out self triggered hash changes
+    navigateTo(hash);
+});

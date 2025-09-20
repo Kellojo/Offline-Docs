@@ -15,3 +15,5 @@ The asset relies on Unitys Visual Effect Graph package. To install the package o
 1. Add the `Stylized Kelp Renderer` prefab to your scene (it can be found under Stylized-Kelp > Prefabs)
 2. Right klick in your hierarchy and pick `Create > 3D Object > Stylized Kelp`
 3. Click play and marvel at the kelp
+
+[Link to another page](#Core-Concepts/CodeTest)
