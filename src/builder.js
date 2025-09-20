@@ -7,7 +7,8 @@ const hljs = require('highlight.js');
 const slugify = require('slugify');
 
 class DocsBuilder {
-
+    
+    DEFAULT_DOCS_DIR = "./docs";
 
 
     constructor(config) {
@@ -19,6 +20,7 @@ class DocsBuilder {
         if (!config) config = yaml.parse(fs.readFileSync(configPath, 'utf-8'));
 
         config.theme = config.theme || 'cyan';
+        config.docsDir = config.docsDir || this.DEFAULT_DOCS_DIR;
 
         this.config = config;
         this.usedCodeLanguages = new Set();
@@ -26,7 +28,7 @@ class DocsBuilder {
 
     build(options) {
         const template = this.readPackageFileSync("./src/page/index.html");
-        const pages = JSON.stringify(this.readMdFiles("./docs"), null, 4);
+        const pages = JSON.stringify(this.readMdFiles(this.config.docsDir), null, 4);
         const output = mustache.render(template, {
             title: this.config.title,
             content: pages,
@@ -123,15 +125,32 @@ class DocsBuilder {
 
         content = md.renderer.render(parsedMarkdown, md.options);
 
-
         const title = path.basename(file, '.md');
         return {
-            id: slugify(title),
+            id: this.getPageId(file),
             title: title,
             ... metadata,
             content: content,
             isPage: true,
         };
+    }
+
+    /**
+     * Gets the pages ID based on its file path.
+     * @param {string} fileName 
+     * @returns {string}
+     * @public
+     */
+    getPageId(fileName) {
+        const normalized = path.normalize(fileName);
+        const segments = normalized.split(path.sep).filter(Boolean);
+        segments[segments.length - 1] = path.basename(segments[segments.length - 1], '.md');
+
+        if (segments[0] === path.normalize(this.config.docsDir)) {
+            segments.shift();
+        }
+
+        return segments.map(seg => slugify(seg)).join('/');
     }
 
 
