@@ -85,6 +85,7 @@ You can also link to specific headings within a page by appending `?h=Heading-Na
 Where `Kelp-Settings-2` is the slugified version of the heading you want to link to.
 
 ## Roadmap
+- Support dark and light mode (currently only supports dark mode)
+- Support infinite folder nesting (currently only supports folders on the root level)
 - Improved image embedding (only embedd images once)
-- Support infinite nesting (currently only supports folders on the root level)
 - Support phones and make the pages more responsive
