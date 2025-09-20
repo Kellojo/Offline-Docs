@@ -56,6 +56,13 @@ order: 1
 ---
 ```
 
+## Linking between pages
+You can link between different pages by using the following syntax:
+```
+[Link to another page](#Core-Concepts/CodeTest)
+```
+Where `Core-Concepts/CodeTest` is the slugified path to the page you want to link to.
+
 ## Roadmap
 - Linking between different headings across pages
 - Improved image embedding (only embedd images once)
