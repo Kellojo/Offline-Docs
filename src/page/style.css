@@ -64,6 +64,10 @@ main {
     overflow: hidden;
 }
 
+main *:focus-visible {
+    outline: none;
+}
+
 
 body nav {
     background-color: hsl(222 23% 15% / 1);
@@ -108,8 +112,10 @@ nav ul {
     margin-bottom: 4px;
 }
 
-.navBarItem:not(.submenuHeader):hover {
+.navBarItem:not(.submenuHeader):hover,
+.navBarItem:not(.submenuHeader):focus {
     background-color: hsl(222 23% 20% / 1);
+    outline: none;
 }
 
 .navBarItemSelected {

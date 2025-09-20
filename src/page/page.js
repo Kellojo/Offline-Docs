@@ -54,6 +54,13 @@ navBarItems.forEach(item => {
     item.addEventListener('click', () => {
         navigateTo(item.getAttribute('data-pageId'));
     });
+
+    item.addEventListener('keypress', (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            item.click();
+        }
+    });
 });
 
 const getHeadingTarget = (hash) => {
