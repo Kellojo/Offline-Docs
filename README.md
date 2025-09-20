@@ -22,7 +22,7 @@ A simple Node.js package that you can use to create offline product documentatio
     - Embeds your md files
 - Syntax highlighting for code blocks
 - Supports images and folders
-- Supports linking between different pages
+- Supports linking between different pages and headings
 
 ## Quickstart
 1. Create a new folder and add a config.yaml to it with the following content:
