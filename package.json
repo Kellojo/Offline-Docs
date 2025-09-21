@@ -1,6 +1,6 @@
 {
     "name": "offline-md-docs",
-    "version": "1.0.49",
+    "version": "1.0.50",
     "description": "A simple Node.js package that you can use to create offline product documentation using Markdown. The tool embeds all content into a single output file.",
     "main": "src/build.js",
     "scripts": {
