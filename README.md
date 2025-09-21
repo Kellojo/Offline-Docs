@@ -19,7 +19,7 @@ A simple Node.js package that you can use to create offline product documentatio
 ## Features
 
 - Yields a singular .html file as it's output, that is ready for offline use (0 dependencies)
-  - Embeds images as base64
+  - Embeds images as base64 (with caching to avoid duplicates)
   - Embeds your md files
 - Syntax highlighting for code blocks
 - Supports images and folders
@@ -105,7 +105,6 @@ Where `Kelp-Settings-2` is the slugified version of the heading you want to link
 
 - Support dark and light mode (currently only supports dark mode)
 - Support infinite folder nesting (currently only supports folders on the root level)
-- Improved image embedding (only embedd images once)
 - Support phones and make the pages more responsive
 - Switch to async fs functions and process pages in parallel
 - Create documentation page using the tool
