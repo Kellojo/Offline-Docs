@@ -48,6 +48,34 @@ const getPageById = (id, entries) => {
   return null;
 };
 
+const iteratePages = (callback, entries) => {
+    entries = entries || pages;
+  for (const key in entries) {
+    const page = entries[key];
+    if (page.isPage) {
+      callback(page);
+    } else if (!page.isPage && page.entries) {
+      iteratePages(callback, page.entries);
+    }
+  }
+};
+
+// Embed images from cache
+iteratePages((page) => {
+    const imageCache = window.imageCache || {};
+    if (!page.content) return;
+
+    console.log(`Processing images for page ${page.id}`);
+
+    const images = Object.keys(imageCache);
+    images.forEach((img) => {
+        const dataUrl = imageCache[img];
+        page.content = page.content.replaceAll(img, dataUrl);
+
+        console.log(`Replaced image ${img} with cached data URL in page ${page.id}`);
+    });
+}, pages);
+
 const pageContent = document.getElementById("pageContent");
 const navBarItems = document.querySelectorAll(".navBarItem");
 navBarItems.forEach((item) => {

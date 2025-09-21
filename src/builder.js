@@ -29,6 +29,7 @@ class DocsBuilder {
 
     this.config = config;
     this.usedCodeLanguages = new Set();
+    this.imageCache = new Map();
   }
 
   build(options) {
@@ -45,6 +46,7 @@ class DocsBuilder {
       content: pages,
       style: this.getStylesheets(),
       script: this.getScripts(),
+    imageCacheScript: this.getImageCacheScript(),
       externalLink: this.getExternalLink(),
     });
 
@@ -129,8 +131,11 @@ class DocsBuilder {
                 const ext = path.extname(imagePath).slice(1);
                 const base64 = imageData.toString("base64");
                 const dataUri = `data:image/${ext};base64,${base64}`;
-                child.attrSet("src", dataUri);
-                //console.log(`Embedded image: ${imagePath}`);
+                const cacheKey = `cachedImage-${src}`;
+                if (!this.imageCache.has(cacheKey))
+                  this.imageCache.set(cacheKey, dataUri);
+                child.attrSet("src", cacheKey);
+
                 this.imageCount++;
               } else {
                 console.warn(`Image file not found: ${imagePath}`);
@@ -235,6 +240,16 @@ class DocsBuilder {
         return `<script>\n${script}\n</script>`;
       })
       .join("\n");
+  }
+
+  getImageCacheScript() {
+    return `
+        <script>
+            window.imageCache = ${JSON.stringify(
+                Object.fromEntries(this.imageCache),
+            )};
+        </script>
+    `;
   }
 
   getExternalLink() {
