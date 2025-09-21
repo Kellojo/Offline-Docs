@@ -4,6 +4,7 @@ const mustache = require('mustache');
 const yaml = require('yaml');
 const MarkdownIt = require('markdown-it');
 const mdAnchor = require('markdown-it-anchor');
+const MarkdownItEmoji = require('markdown-it-emoji');
 const hljs = require('highlight.js');
 const slugify = require('slugify');
 const { performance } = require('perf_hooks');
@@ -279,6 +280,8 @@ class DocsBuilder {
         mdit.use(mdAnchor, {
             slugify: slugify,
         });
+
+        mdit.use(MarkdownItEmoji.full, {});
 
         return mdit;
     }
