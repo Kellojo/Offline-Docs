@@ -25,6 +25,7 @@ class DocsBuilder {
 
         if (!config) config = yaml.parse(fs.readFileSync(configPath, 'utf-8'))
 
+        config = config || {};
         config.docsDir = config.docsDir || this.DEFAULT_DOCS_DIR
 
         this.config = config
