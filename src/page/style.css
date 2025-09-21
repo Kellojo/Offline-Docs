@@ -3,6 +3,8 @@
     --navBarWidth: 350px;
     --maxContentWidth: 1500px;
     --pagePadding: 2rem;
+
+    --navBarBackground: var(--pico-code-background-color);
 }
 
 html {
@@ -26,12 +28,11 @@ header {
 }
 
 .headerContent {
-    padding: 1rem 2rem;
+    padding: 1rem var(--pagePadding);
     box-sizing: border-box;
     max-width: var(--maxContentWidth);
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
     height: 100%;
 }
@@ -45,7 +46,7 @@ header {
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    margin-left: auto;
 }
 
 .mainContent {
@@ -67,10 +68,10 @@ main *:focus-visible {
 
 body nav {
     margin-top: var(--pagePadding);
-    background-color: hsl(222 23% 15% / 1);
-    border: 0.5rem solid hsl(222 23% 15% / 1);
+    background-color: var(--navBarBackground);
+    border: 0.5rem solid var(--navBarBackground);
     padding-right: 0.5rem;
-    border-radius: 8px;
+    border-radius: var(--pico-border-radius);
     width: 100%;
     box-sizing: border-box;
     height: fit-content;
@@ -100,7 +101,7 @@ nav ul {
     padding: 0.5rem 1rem;
     width: 100%;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: var(--pico-border-radius);
     color: var(--pico-h3-color);
     transition: background-color 0.2s;
 }
@@ -109,15 +110,15 @@ nav ul {
     margin-bottom: 4px;
 }
 
-.navBarItem:not(.submenuHeader):hover,
-.navBarItem:not(.submenuHeader):focus {
-    background-color: hsl(222 23% 20% / 1);
+.navBarItem:not(.submenuHeader):not(.navBarItemSelected):hover,
+.navBarItem:not(.submenuHeader):not(.navBarItemSelected):focus {
+    background-color: var(--pico-primary-focus);
     outline: none;
 }
 
 .navBarItemSelected {
-    color: var(--pico-primary);
-    background-color: hsl(222 23% 20% / 1);
+    color: var(--pico-secondary-inverse);
+    background-color: var(--pico-primary-underline);
 }
 
 .navBarItem.submenuHeader {
@@ -134,7 +135,7 @@ nav ul {
 }
 
 md-block img {
-    border-radius: 8px;
+    border-radius: var(--pico-border-radius);
 }
 
 md-block pre code {
@@ -154,4 +155,64 @@ body nav,
     box-shadow:
         0 3px 6px rgba(0, 0, 0, 0.16),
         0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.mobileMenuButton {
+    width: 2rem;
+    height: 2rem;
+    color: var(--pico-h3-color);
+    margin-right: 1rem;
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+    :root {
+        --pagePadding: 1rem;
+
+        scrollbar-gutter: initial;
+    }
+
+    main {
+        width: 100vw;
+    }
+
+    .mainContent {
+        padding-left: 0;
+    }
+
+    body nav {
+        position: fixed;
+        margin: 0;
+        top: var(--headerHeight);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        border-radius: 0;
+        padding: 0;
+        transition: left 0.2s;
+        border-width: var(--pagePadding);
+    }
+
+    .mobileMenuButton {
+        display: block;
+    }
+
+    .mobileMenuButton.active .openIcon {
+        display: none;
+    }
+    .mobileMenuButton.active .closeIcon {
+        display: block;
+    }
+    .closeIcon {
+        display: none;
+    }
+
+    .headerContentRight {
+        display: none;
+    }
+
+    body nav.mobileHidden {
+        left: -100%;
+    }
 }

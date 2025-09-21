@@ -133,6 +133,8 @@ const navigateTo = (hash) => {
         }, 0);
     }
 
+    toggleMobileMenu(false);
+
     console.log('Navigated to page:', pageId);
     return true;
 };
@@ -148,3 +150,20 @@ window.addEventListener('hashchange', (event) => {
     if (hash === window.offlineDocsCurrentPage) return; // filter out self triggered hash changes
     navigateTo(hash);
 });
+
+function toggleMobileMenu(hidden) {
+    const nav = document.querySelector('nav');
+
+    if (typeof hidden !== 'boolean') {
+        hidden = nav.classList.contains('mobileHidden');
+    }
+
+    nav.classList.toggle('mobileHidden', !hidden);
+
+    const button = document.getElementById('mobileMenuButton');
+    button.classList.toggle('active', hidden);
+}
+
+document
+    .getElementById('mobileMenuButton')
+    .addEventListener('click', () => toggleMobileMenu());

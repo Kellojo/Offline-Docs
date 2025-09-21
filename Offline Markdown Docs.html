@@ -11,6 +11,8 @@
     --navBarWidth: 350px;
     --maxContentWidth: 1500px;
     --pagePadding: 2rem;
+
+    --navBarBackground: var(--pico-code-background-color);
 }
 
 html {
@@ -34,12 +36,11 @@ header {
 }
 
 .headerContent {
-    padding: 1rem 2rem;
+    padding: 1rem var(--pagePadding);
     box-sizing: border-box;
     max-width: var(--maxContentWidth);
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
     height: 100%;
 }
@@ -53,7 +54,7 @@ header {
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    margin-left: auto;
 }
 
 .mainContent {
@@ -75,10 +76,10 @@ main *:focus-visible {
 
 body nav {
     margin-top: var(--pagePadding);
-    background-color: hsl(222 23% 15% / 1);
-    border: 0.5rem solid hsl(222 23% 15% / 1);
+    background-color: var(--navBarBackground);
+    border: 0.5rem solid var(--navBarBackground);
     padding-right: 0.5rem;
-    border-radius: 8px;
+    border-radius: var(--pico-border-radius);
     width: 100%;
     box-sizing: border-box;
     height: fit-content;
@@ -108,7 +109,7 @@ nav ul {
     padding: 0.5rem 1rem;
     width: 100%;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: var(--pico-border-radius);
     color: var(--pico-h3-color);
     transition: background-color 0.2s;
 }
@@ -117,15 +118,15 @@ nav ul {
     margin-bottom: 4px;
 }
 
-.navBarItem:not(.submenuHeader):hover,
-.navBarItem:not(.submenuHeader):focus {
-    background-color: hsl(222 23% 20% / 1);
+.navBarItem:not(.submenuHeader):not(.navBarItemSelected):hover,
+.navBarItem:not(.submenuHeader):not(.navBarItemSelected):focus {
+    background-color: var(--pico-primary-focus);
     outline: none;
 }
 
 .navBarItemSelected {
-    color: var(--pico-primary);
-    background-color: hsl(222 23% 20% / 1);
+    color: var(--pico-secondary-inverse);
+    background-color: var(--pico-primary-underline);
 }
 
 .navBarItem.submenuHeader {
@@ -142,7 +143,7 @@ nav ul {
 }
 
 md-block img {
-    border-radius: 8px;
+    border-radius: var(--pico-border-radius);
 }
 
 md-block pre code {
@@ -162,6 +163,66 @@ body nav,
     box-shadow:
         0 3px 6px rgba(0, 0, 0, 0.16),
         0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.mobileMenuButton {
+    width: 2rem;
+    height: 2rem;
+    color: var(--pico-h3-color);
+    margin-right: 1rem;
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    :root {
+        --pagePadding: 1rem;
+
+        scrollbar-gutter: initial;
+    }
+
+    main {
+        width: 100vw;
+    }
+
+    .mainContent {
+        padding-left: 0;
+    }
+
+    body nav {
+        position: fixed;
+        margin: 0;
+        top: var(--headerHeight);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        border-radius: 0;
+        padding: 0;
+        transition: left 0.2s;
+        border-width: var(--pagePadding);
+    }
+
+    .mobileMenuButton {
+        display: block;
+    }
+
+    .mobileMenuButton.active .openIcon {
+        display: none;
+    }
+    .mobileMenuButton.active .closeIcon {
+        display: block;
+    }
+    .closeIcon {
+        display: none;
+    }
+
+    .headerContentRight {
+        display: none;
+    }
+
+    body nav.mobileHidden {
+        left: -100%;
+    }
 }
 
 </style>
@@ -3313,6 +3374,33 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
     <body>
         <header>
             <div class="headerContent">
+                <div id="mobileMenuButton" class="mobileMenuButton">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="openIcon"
+                    >
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="closeIcon"
+                    >
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
                 <h1>Offline Markdown Docs</h1>
                 <div class="headerContentRight"><a href="https://www.npmjs.com/package/offline-md-docs" target="_blank" rel="noopener">Visit on NPM</a></div>
             </div>
@@ -3357,6 +3445,13 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
                 &quot;title&quot;: &quot;🖼️ Images&quot;,
                 &quot;order&quot;: 2,
                 &quot;content&quot;: &quot;&lt;h1 id&#x3D;\&quot;Images\&quot; tabindex&#x3D;\&quot;-1\&quot;&gt;Images&lt;&#x2F;h1&gt;\n&lt;p&gt;Images can be added to your documentation by placing them in a folder called &lt;code&gt;images&lt;&#x2F;code&gt; inside your &lt;code&gt;docs&lt;&#x2F;code&gt; folder.\nThese images will then be automatically included in the final build and can be referenced in your markdown files like this:&lt;&#x2F;p&gt;\n&lt;pre&gt;&lt;code class&#x3D;\&quot;language-markdown\&quot;&gt;![&lt;span class&#x3D;\&quot;hljs-string\&quot;&gt;Alt-Text&lt;&#x2F;span&gt;](&lt;span class&#x3D;\&quot;hljs-link\&quot;&gt;..&#x2F;images&#x2F;main-banner.png&lt;&#x2F;span&gt;)\n&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;\n&lt;p&gt;Please note the &lt;code&gt;..&#x2F;&lt;&#x2F;code&gt; at the beginning of the path, is required, since this file here is located in the &lt;code&gt;Customization&lt;&#x2F;code&gt; subfolder of the &lt;code&gt;docs&lt;&#x2F;code&gt; folder.&lt;&#x2F;p&gt;\n&lt;p&gt;This will render the image like this:\n&lt;img src&#x3D;\&quot;cachedImage-..&#x2F;images&#x2F;main-banner.png\&quot; alt&#x3D;\&quot;Alt-Text\&quot;&gt;&lt;&#x2F;p&gt;\n&quot;,
+                &quot;isPage&quot;: true
+            },
+            &quot;😄 Emojis&quot;: {
+                &quot;id&quot;: &quot;Customization&#x2F;Emojis&quot;,
+                &quot;title&quot;: &quot;😄 Emojis&quot;,
+                &quot;order&quot;: 4,
+                &quot;content&quot;: &quot;&lt;h1 id&#x3D;\&quot;Emojis\&quot; tabindex&#x3D;\&quot;-1\&quot;&gt;Emojis&lt;&#x2F;h1&gt;\n&lt;p&gt;Emojis can be added to your documentation by using standard emoji shortcodes, like &lt;code&gt;:smile:&lt;&#x2F;code&gt; (😄), &lt;code&gt;:rocket:&lt;&#x2F;code&gt; (🚀), or &lt;code&gt;:tada:&lt;&#x2F;code&gt; (🎉).\nAdditionally, you can also use Unicode emojis directly in your markdown files, like this: 😄🚀🎉.&lt;&#x2F;p&gt;\n&quot;,
                 &quot;isPage&quot;: true
             }
         },
@@ -3516,6 +3611,8 @@ const navigateTo = (hash) => {
         }, 0);
     }
 
+    toggleMobileMenu(false);
+
     console.log('Navigated to page:', pageId);
     return true;
 };
@@ -3531,6 +3628,23 @@ window.addEventListener('hashchange', (event) => {
     if (hash === window.offlineDocsCurrentPage) return; // filter out self triggered hash changes
     navigateTo(hash);
 });
+
+function toggleMobileMenu(hidden) {
+    const nav = document.querySelector('nav');
+
+    if (typeof hidden !== 'boolean') {
+        hidden = nav.classList.contains('mobileHidden');
+    }
+
+    nav.classList.toggle('mobileHidden', !hidden);
+
+    const button = document.getElementById('mobileMenuButton');
+    button.classList.toggle('active', hidden);
+}
+
+document
+    .getElementById('mobileMenuButton')
+    .addEventListener('click', () => toggleMobileMenu());
 
 </script>
     </body>
