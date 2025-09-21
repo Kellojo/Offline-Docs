@@ -57,6 +57,7 @@ class DocsBuilder {
     console.log(
       `📄 Processed docs with ${this.pagesCount} pages and ${this.imageCount} images in ${duration} ms.`,
     );
+    console.log(`📦 Output size: ${this.getStringSizeInMB(output)}`);
 
     return output;
   }
@@ -277,6 +278,11 @@ class DocsBuilder {
   packageFileExistsSync(filePath) {
     const localPath = path.join(__dirname, "..", filePath);
     return fs.existsSync(localPath);
+  }
+
+  getStringSizeInMB(str) {
+    const bytes = Buffer.byteLength(str, "utf8");
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
   }
 }
 
