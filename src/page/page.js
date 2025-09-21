@@ -49,7 +49,7 @@ const getPageById = (id, entries) => {
 };
 
 const iteratePages = (callback, entries) => {
-    entries = entries || pages;
+  entries = entries || pages;
   for (const key in entries) {
     const page = entries[key];
     if (page.isPage) {
@@ -62,18 +62,20 @@ const iteratePages = (callback, entries) => {
 
 // Embed images from cache
 iteratePages((page) => {
-    const imageCache = window.imageCache || {};
-    if (!page.content) return;
+  const imageCache = window.imageCache || {};
+  if (!page.content) return;
 
-    console.log(`Processing images for page ${page.id}`);
+  console.log(`Processing images for page ${page.id}`);
 
-    const images = Object.keys(imageCache);
-    images.forEach((img) => {
-        const dataUrl = imageCache[img];
-        page.content = page.content.replaceAll(img, dataUrl);
+  const images = Object.keys(imageCache);
+  images.forEach((img) => {
+    const dataUrl = imageCache[img];
+    page.content = page.content.replaceAll(img, dataUrl);
 
-        console.log(`Replaced image ${img} with cached data URL in page ${page.id}`);
-    });
+    console.log(
+      `Replaced image ${img} with cached data URL in page ${page.id}`,
+    );
+  });
 }, pages);
 
 const pageContent = document.getElementById("pageContent");

@@ -46,7 +46,7 @@ class DocsBuilder {
       content: pages,
       style: this.getStylesheets(),
       script: this.getScripts(),
-    imageCacheScript: this.getImageCacheScript(),
+      imageCacheScript: this.getImageCacheScript(),
       externalLink: this.getExternalLink(),
     });
 
@@ -246,7 +246,7 @@ class DocsBuilder {
     return `
         <script>
             window.imageCache = ${JSON.stringify(
-                Object.fromEntries(this.imageCache),
+              Object.fromEntries(this.imageCache),
             )};
         </script>
     `;
