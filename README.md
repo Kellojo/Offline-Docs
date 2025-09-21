@@ -108,3 +108,4 @@ Where `Kelp-Settings-2` is the slugified version of the heading you want to link
 - Improved image embedding (only embedd images once)
 - Support phones and make the pages more responsive
 - Switch to async fs functions and process pages in parallel
+- Create documentation page using the tool
