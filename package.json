@@ -4,9 +4,10 @@
   "description": "A simple Node.js package that you can use to create offline product documentation using Markdown. The tool embeds all content into a single output file.",
   "main": "src/build.js",
   "scripts": {
-    "test": "",
+    "test": "npx prettier . --check",
     "start": "node ./src/server.js",
-    "build": "node ./src/build.js"
+    "build": "node ./src/build.js",
+    "format": "prettier --write ."
   },
   "bin": "src/cli.js",
   "repository": {
@@ -41,5 +42,8 @@
     "mustache": "^4.2.0",
     "slugify": "^1.6.6",
     "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
   }
 }

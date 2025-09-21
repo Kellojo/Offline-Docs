@@ -1,39 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
 
     {{{style}}}
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <div class="headerContent">
-            <h1>{{title}}</h1>
-            <div class="headerContentRight">
-                {{{externalLink}}}
-            </div>
-        </div>
+      <div class="headerContent">
+        <h1>{{title}}</h1>
+        <div class="headerContentRight">{{{externalLink}}}</div>
+      </div>
     </header>
 
     <div class="mainContent">
-        <nav>
-            <ul></ul>
-        </nav>
+      <nav>
+        <ul></ul>
+      </nav>
 
-        <main>
-            <md-block id="pageContent"></md-block>
-        </main>
-
+      <main>
+        <md-block id="pageContent"></md-block>
+      </main>
     </div>
 
-    <div id="contentJson" style="display: none;">{{content}}</div>
+    <div id="contentJson" style="display: none">{{content}}</div>
 
     {{{script}}}
-</body>
-
+  </body>
 </html>

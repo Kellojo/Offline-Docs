@@ -3,9 +3,9 @@
 const args = process.argv.slice(2);
 
 if (args[0] === "start") {
-    require("./server");
+  require("./server");
 } else if (args[0] === "build") {
-    require("./build");
+  require("./build");
 } else {
   console.log("❓ Unknown command. Use: start | build");
 }
