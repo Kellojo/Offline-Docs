@@ -10,5 +10,6 @@ order: 2
     - Embeds images as base64 (with caching to avoid duplicates)
     - Embeds your md files
 - Syntax highlighting for code blocks
-- Supports images and folders
+- Supports embedding images
+- Supports folders to organize your docs
 - Supports linking between different pages and headings
