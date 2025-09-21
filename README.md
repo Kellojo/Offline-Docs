@@ -14,9 +14,10 @@ A simple Node.js package that you can use to create offline product documentatio
 - Supports linking between different pages and headings
 
 ## View Documentation & Demo
-You can view the documentation for this project [here](tbd).
 
-## Roadmap<>
+You can view the documentation for this project [here](https://kellojo.github.io/Offline-Docs/Offline%20Markdown%20Docs.html#Quickstart).
+
+## Roadmap
 
 - Support dark and light mode (currently only supports dark mode)
 - Support infinite folder nesting (currently only supports folders on the root level)
