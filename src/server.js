@@ -1,6 +1,7 @@
 const express = require("express");
 const builder = require("./builder");
 const livereload = require("livereload");
+var pjson = require('../package.json');
 
 const app = express();
 const PORT = 3000;
@@ -36,5 +37,10 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
+    const url = `http://localhost:${PORT}`;
+    console.log(`📘 offline-md-docs v${pjson.version}`);
+    console.log('');
+
+    console.log(`🚀 Server running at ${url}`);
+    console.log(`👀 Watching docs/ for changes...`);
 });
