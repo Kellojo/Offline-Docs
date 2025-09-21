@@ -7,8 +7,8 @@
 ```
 
 ```js
-const a = 2;
-console.log(a);
+const a = 2
+console.log(a)
 ```
 
 ```csharp

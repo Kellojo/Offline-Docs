@@ -11,16 +11,16 @@ A simple Node.js package that you can use to create offline product documentatio
 3. [Running a local dev server](#running-a-local-dev-server)
 4. [Building the docs](#building-the-docs)
 5. [Customization](#customization)
-   - [Theming](#theming)
-   - [Custom Sort Order](#custom-sort-order)
-   - [Linking between pages](#linking-between-pages)
+    - [Theming](#theming)
+    - [Custom Sort Order](#custom-sort-order)
+    - [Linking between pages](#linking-between-pages)
 6. [Roadmap](#roadmap)
 
 ## Features
 
 - Yields a singular .html file as it's output, that is ready for offline use (0 dependencies)
-  - Embeds images as base64 (with caching to avoid duplicates)
-  - Embeds your md files
+    - Embeds images as base64 (with caching to avoid duplicates)
+    - Embeds your md files
 - Syntax highlighting for code blocks
 - Supports images and folders
 - Supports linking between different pages and headings

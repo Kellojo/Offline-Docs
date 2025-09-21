@@ -1,49 +1,49 @@
 {
-  "name": "offline-md-docs",
-  "version": "1.0.49",
-  "description": "A simple Node.js package that you can use to create offline product documentation using Markdown. The tool embeds all content into a single output file.",
-  "main": "src/build.js",
-  "scripts": {
-    "test": "npx prettier . --check",
-    "start": "node ./src/server.js",
-    "build": "node ./src/build.js",
-    "format": "prettier --write ."
-  },
-  "bin": "src/cli.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kellojo/Offline-Docs.git"
-  },
-  "keywords": [
-    "documentation",
-    "docs",
-    "markdown",
-    "offline",
-    "static site generator",
-    "ssg",
-    "single file",
-    "nodejs",
-    "embedded"
-  ],
-  "author": "",
-  "license": "MIT",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Kellojo/Offline-Docs/issues"
-  },
-  "homepage": "https://github.com/Kellojo/Offline-Docs#readme",
-  "dependencies": {
-    "connect-livereload": "^0.6.1",
-    "express": "^5.1.0",
-    "highlight.js": "^11.11.1",
-    "livereload": "^0.10.3",
-    "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^9.2.0",
-    "mustache": "^4.2.0",
-    "slugify": "^1.6.6",
-    "yaml": "^2.8.1"
-  },
-  "devDependencies": {
-    "prettier": "3.6.2"
-  }
+    "name": "offline-md-docs",
+    "version": "1.0.49",
+    "description": "A simple Node.js package that you can use to create offline product documentation using Markdown. The tool embeds all content into a single output file.",
+    "main": "src/build.js",
+    "scripts": {
+        "test": "npx prettier . --check",
+        "start": "node ./src/server.js",
+        "build": "node ./src/build.js",
+        "format": "prettier --write ."
+    },
+    "bin": "src/cli.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Kellojo/Offline-Docs.git"
+    },
+    "keywords": [
+        "documentation",
+        "docs",
+        "markdown",
+        "offline",
+        "static site generator",
+        "ssg",
+        "single file",
+        "nodejs",
+        "embedded"
+    ],
+    "author": "",
+    "license": "MIT",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Kellojo/Offline-Docs/issues"
+    },
+    "homepage": "https://github.com/Kellojo/Offline-Docs#readme",
+    "dependencies": {
+        "connect-livereload": "^0.6.1",
+        "express": "^5.1.0",
+        "highlight.js": "^11.11.1",
+        "livereload": "^0.10.3",
+        "markdown-it": "^14.1.0",
+        "markdown-it-anchor": "^9.2.0",
+        "mustache": "^4.2.0",
+        "slugify": "^1.6.6",
+        "yaml": "^2.8.1"
+    },
+    "devDependencies": {
+        "prettier": "3.6.2"
+    }
 }
