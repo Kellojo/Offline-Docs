@@ -6,11 +6,13 @@ const MarkdownIt = require("markdown-it");
 const mdAnchor = require("markdown-it-anchor");
 const hljs = require('highlight.js');
 const slugify = require('slugify');
+const {performance} = require('perf_hooks');
 
 class DocsBuilder {
     
     DEFAULT_DOCS_DIR = "./docs";
-
+    pagesCount = 0;
+    imageCount = 0;
 
     constructor(config) {
         const configPath = "./config.yaml";
@@ -27,6 +29,8 @@ class DocsBuilder {
     }
 
     build(options) {
+        const startTime = performance.now();
+
         const template = this.readPackageFileSync("./src/page/index.html");
         const pages = JSON.stringify(this.readMdFiles(this.config.docsDir), null, 4);
         const output = mustache.render(template, {
@@ -40,6 +44,10 @@ class DocsBuilder {
         if (options.saveToDisk) {
             fs.writeFileSync(`./${this.config.title}.html`, output, 'utf-8');
         }
+
+        const endTime = performance.now();
+        const duration = Math.round(endTime - startTime);
+        console.log(`📄 Processed docs with ${this.pagesCount} pages and ${this.imageCount} images in ${duration} ms.`);
 
         return output;
     }
@@ -77,6 +85,7 @@ class DocsBuilder {
         return mdContent;
     }
     parsePage (file) {
+        this.pagesCount++;
         let content = fs.readFileSync(file, 'utf-8');
 
         let metadata = {
@@ -114,6 +123,7 @@ class DocsBuilder {
                                 const dataUri = `data:image/${ext};base64,${base64}`;
                                 child.attrSet('src', dataUri);
                                 //console.log(`Embedded image: ${imagePath}`);
+                                this.imageCount++;
                             } else {
                                 console.warn(`Image file not found: ${imagePath}`);
                             }
