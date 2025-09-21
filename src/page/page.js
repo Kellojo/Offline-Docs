@@ -65,16 +65,10 @@ iteratePages((page) => {
     const imageCache = window.imageCache || {}
     if (!page.content) return
 
-    console.log(`Processing images for page ${page.id}`)
-
     const images = Object.keys(imageCache)
     images.forEach((img) => {
         const dataUrl = imageCache[img]
         page.content = page.content.replaceAll(img, dataUrl)
-
-        console.log(
-            `Replaced image ${img} with cached data URL in page ${page.id}`
-        )
     })
 }, pages)
 
