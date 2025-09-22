@@ -1,4 +1,6 @@
 const pages = JSON.parse(document.getElementById('contentJson').textContent);
+const flatPagesList = [];
+iteratePages((page) => flatPagesList.push(page));
 
 const buildNavBar = (pages, parent = null) => {
     const navBar = document.querySelector('nav ul');
@@ -48,7 +50,7 @@ const getPageById = (id, entries) => {
     return null;
 };
 
-const iteratePages = (callback, entries) => {
+function iteratePages(callback, entries) {
     entries = entries || pages;
     for (const key in entries) {
         const page = entries[key];
@@ -58,7 +60,7 @@ const iteratePages = (callback, entries) => {
             iteratePages(callback, page.entries);
         }
     }
-};
+}
 
 // Embed images from cache
 iteratePages((page) => {
@@ -167,3 +169,112 @@ function toggleMobileMenu(hidden) {
 document
     .getElementById('mobileMenuButton')
     .addEventListener('click', () => toggleMobileMenu());
+
+class SearchModal {
+    constructor() {
+        this.modal = document.getElementById('searchDialog');
+        this.modal.addEventListener('close', this.onClose.bind(this));
+        window.addEventListener('keydown', this.onKeydown.bind(this));
+
+        this.searchInput = this.modal.querySelector('input');
+        this.searchInput.addEventListener('input', this.onSearch.bind(this));
+
+        this.searchResults = this.modal.querySelector('#searchResults');
+
+        window.addEventListener('load', () => {
+            this.fuse = new Fuse(flatPagesList, {
+                keys: ['title', 'textContent', 'id'],
+                includeMatches: true,
+                minMatchCharLength: 2,
+            });
+        });
+    }
+
+    onKeydown(event) {
+        if (
+            event.target.tagName === 'INPUT' ||
+            event.target.tagName === 'TEXTAREA'
+        )
+            return;
+
+        if (
+            event.key === 'Escape' &&
+            document.activeElement === this.searchInput
+        ) {
+            this.close();
+            return;
+        }
+
+        if (
+            (event.key === 'k' && (event.ctrlKey || event.metaKey)) ||
+            (event.key === 'p' && (event.ctrlKey || event.metaKey)) ||
+            (event.key === 'f' && (event.ctrlKey || event.metaKey))
+        ) {
+            if (document.activeElement === this.searchInput) return;
+
+            event.preventDefault();
+            this.toggle();
+        }
+    }
+
+    onSearch(event) {
+        const results = this.fuse.search(event.target.value, { limit: 10 });
+
+        this.searchResults.innerHTML = '';
+
+        if (results.length === 0) {
+            this.searchResults.innerHTML = '<p>No results found</p>';
+            return;
+        }
+
+        let resultListHTML = '';
+        results.forEach((result) => {
+            const page = result.item;
+            const searchResult = `
+            <div class="searchResultItem" data-pageId="${page.id}" tabindex="0">
+                <h3>${page.title}</h3>
+                <p>${page.textContent.substring(0, 150)}</p>
+            </div>
+        `;
+
+            resultListHTML += searchResult;
+        });
+        this.searchResults.innerHTML = resultListHTML;
+
+        const searchResultItems =
+            document.querySelectorAll('.searchResultItem');
+        searchResultItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                const pageId = item.getAttribute('data-pageId');
+                navigateTo(pageId);
+                this.close();
+            });
+
+            item.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    item.click();
+                }
+            });
+        });
+    }
+
+    onClose() {
+        this.searchInput.value = '';
+        document.getElementById('searchResults').innerHTML = '';
+    }
+
+    toggle() {
+        if (this.modal.open) this.close();
+        else this.open();
+    }
+
+    open() {
+        this.modal.showModal();
+    }
+    close() {
+        this.modal.close();
+    }
+}
+
+const searchModal = new SearchModal();

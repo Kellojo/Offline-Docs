@@ -156,14 +156,13 @@ class DocsBuilder {
             }
         });
 
-        content = md.renderer.render(parsedMarkdown, md.options);
-
         const title = path.basename(file, '.md');
         return {
             id: this.getPageId(file),
             title: title,
             ...metadata,
-            content: content,
+            content: md.renderer.render(parsedMarkdown, md.options),
+            textContent: content,
             isPage: true,
         };
     }
@@ -243,7 +242,10 @@ class DocsBuilder {
     }
 
     getScripts() {
-        const scriptFiles = new Set(['./src/page/page.js']);
+        const scriptFiles = new Set([
+            './src/page/scripts/page.js',
+            './src/page/scripts/fuse.js',
+        ]);
 
         return Array.from(scriptFiles)
             .map((file) => {

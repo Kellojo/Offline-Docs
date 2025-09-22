@@ -43,6 +43,22 @@
             </div>
         </header>
 
+        <dialog id="searchDialog" class="searchOverlay" open>
+            <form>
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Search (Ctrl+K)"
+                    aria-label="Search"
+                    oninput="onSearch(event)"
+                    autocomplete="off"
+                    spellcheck="false"
+                    autofocus
+                />
+                <div id="searchResults" class="searchResults"></div>
+            </form>
+        </dialog>
+
         <div class="mainContent">
             <nav>
                 <ul></ul>
