@@ -39,9 +39,32 @@
                     </svg>
                 </div>
                 <h1>{{title}}</h1>
-                <div class="headerContentRight">{{{externalLink}}}</div>
+                <div class="headerContentRight">
+                    {{{externalLink}}}
+
+                    <div
+                        class="searchButton"
+                        id="searchButton"
+                        title="Search (Ctrl+K)"
+                    ></div>
+                </div>
             </div>
         </header>
+
+        <dialog id="searchDialog" class="searchOverlay">
+            <form>
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Search (Ctrl+K)"
+                    aria-label="Search"
+                    autocomplete="off"
+                    spellcheck="false"
+                    autofocus
+                />
+                <div id="searchResults" class="searchResults"></div>
+            </form>
+        </dialog>
 
         <div class="mainContent">
             <nav>

@@ -5,6 +5,8 @@
     --pagePadding: 2rem;
 
     --navBarBackground: var(--pico-code-background-color);
+
+    --iconSearch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(255, 255, 255)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
 }
 
 html {
@@ -214,5 +216,9 @@ body nav,
 
     body nav.mobileHidden {
         left: -100%;
+    }
+
+    .searchButton {
+        display: none;
     }
 }

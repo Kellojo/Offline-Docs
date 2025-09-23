@@ -25,3 +25,5 @@ You can view the documentation for this project [here](https://kellojo.github.io
 - Switch to async fs functions and process pages in parallel
 - Switch to a css preprocessor like SASS/LESS
 - Add a search function (?)
+    - Highlight search terms in results
+- Init script
