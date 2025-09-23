@@ -39,18 +39,25 @@
                     </svg>
                 </div>
                 <h1>{{title}}</h1>
-                <div class="headerContentRight">{{{externalLink}}}</div>
+                <div class="headerContentRight">
+                    {{{externalLink}}}
+
+                    <div
+                        class="searchButton"
+                        id="searchButton"
+                        title="Search (Ctrl+K)"
+                    ></div>
+                </div>
             </div>
         </header>
 
-        <dialog id="searchDialog" class="searchOverlay" open>
+        <dialog id="searchDialog" class="searchOverlay">
             <form>
                 <input
                     type="search"
                     name="search"
                     placeholder="Search (Ctrl+K)"
                     aria-label="Search"
-                    oninput="onSearch(event)"
                     autocomplete="off"
                     spellcheck="false"
                     autofocus

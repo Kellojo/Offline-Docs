@@ -5,9 +5,17 @@ const yaml = require('yaml');
 const MarkdownIt = require('markdown-it');
 const mdAnchor = require('markdown-it-anchor');
 const MarkdownItEmoji = require('markdown-it-emoji');
+const removeMarkdown = require('remove-markdown');
 const hljs = require('highlight.js');
 const slugify = require('slugify');
 const { performance } = require('perf_hooks');
+const sass = require('sass');
+
+const AVERAGE_READING_SPEED_WPM = 225;
+
+function countWords(str) {
+    return str.trim().split(/\s+/).length;
+}
 
 class DocsBuilder {
     DEFAULT_DOCS_DIR = './docs';
@@ -156,13 +164,18 @@ class DocsBuilder {
             }
         });
 
+        const textContent = removeMarkdown(content);
         const title = path.basename(file, '.md');
         return {
             id: this.getPageId(file),
             title: title,
             ...metadata,
             content: md.renderer.render(parsedMarkdown, md.options),
-            textContent: content,
+            textContent: textContent,
+            wordCount: countWords(textContent),
+            readingTime: Math.ceil(
+                countWords(textContent) / AVERAGE_READING_SPEED_WPM
+            ),
             isPage: true,
         };
     }
@@ -190,7 +203,11 @@ class DocsBuilder {
 
     getStylesheets() {
         const picoStylesheet = this.getPicoStylesheet(this.config.theme);
-        const cssFiles = new Set(['./src/page/style.css', picoStylesheet]);
+        const cssFiles = new Set([
+            './src/page/style.css',
+            './src/page/styles/search.sass',
+            picoStylesheet,
+        ]);
 
         this.usedCodeLanguages.forEach((lang) => {
             let langStylesheet = this.resolveHighlightJsStyleSheet(
@@ -210,7 +227,8 @@ class DocsBuilder {
         return Array.from(cssFiles)
             .map((file) => {
                 const style = this.readPackageFileSync(file);
-                return `<style>\n${style}\n</style>`;
+                const compiled = sass.compileString(style);
+                return `<style>\n${compiled.css}\n</style>`;
             })
             .join('\n');
     }

@@ -41,6 +41,8 @@
         "markdown-it-anchor": "^9.2.0",
         "markdown-it-emoji": "^3.0.0",
         "mustache": "^4.2.0",
+        "remove-markdown": "^0.6.2",
+        "sass": "^1.93.1",
         "slugify": "^1.6.6",
         "yaml": "^2.8.1"
     },

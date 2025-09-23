@@ -171,10 +171,15 @@ document
     .addEventListener('click', () => toggleMobileMenu());
 
 class SearchModal {
+    currentSelection = 0;
+
     constructor() {
         this.modal = document.getElementById('searchDialog');
         this.modal.addEventListener('close', this.onClose.bind(this));
         window.addEventListener('keydown', this.onKeydown.bind(this));
+
+        const searchButton = document.getElementById('searchButton');
+        searchButton.addEventListener('click', this.toggle.bind(this));
 
         this.searchInput = this.modal.querySelector('input');
         this.searchInput.addEventListener('input', this.onSearch.bind(this));
@@ -191,6 +196,17 @@ class SearchModal {
     }
 
     onKeydown(event) {
+        if (this.modal.open) {
+            if (event.key === 'ArrowDown') this.moveUpDown(1);
+            if (event.key === 'ArrowUp') this.moveUpDown(-1);
+
+            if (event.key === 'Enter') {
+                document
+                    .querySelectorAll('.searchResultItem.selected')[0]
+                    ?.click();
+            }
+        }
+
         if (
             event.target.tagName === 'INPUT' ||
             event.target.tagName === 'TEXTAREA'
@@ -218,12 +234,14 @@ class SearchModal {
     }
 
     onSearch(event) {
+        this.currentSelection = -1;
         const results = this.fuse.search(event.target.value, { limit: 10 });
 
         this.searchResults.innerHTML = '';
 
         if (results.length === 0) {
-            this.searchResults.innerHTML = '<p>No results found</p>';
+            this.searchResults.innerHTML =
+                '<p class="no-results">No results found</p>';
             return;
         }
 
@@ -256,12 +274,19 @@ class SearchModal {
                     item.click();
                 }
             });
+
+            item.addEventListener('focus', () => {
+                const index = Array.from(searchResultItems).indexOf(item);
+                this.currentSelection = index;
+                this.selectItem(this.currentSelection);
+            });
         });
     }
 
     onClose() {
         this.searchInput.value = '';
         document.getElementById('searchResults').innerHTML = '';
+        this.currentSelection = 0;
     }
 
     toggle() {
@@ -270,10 +295,38 @@ class SearchModal {
     }
 
     open() {
+        this.currentSelection = 0;
         this.modal.showModal();
     }
     close() {
         this.modal.close();
+    }
+
+    moveUpDown(direction) {
+        const items = document.querySelectorAll('.searchResultItem');
+        if (items.length === 0) return;
+
+        this.currentSelection += direction;
+        if (this.currentSelection < 0) this.currentSelection = 0;
+        if (this.currentSelection >= items.length)
+            this.currentSelection = items.length - 1;
+
+        this.selectItem(this.currentSelection);
+    }
+
+    selectItem(index) {
+        const items = document.querySelectorAll('.searchResultItem');
+        if (index < 0 || index >= items.length) return;
+
+        items.forEach((item, i) => {
+            item.classList.toggle('selected', i === index);
+        });
+        const selectedItem = items[index];
+        selectedItem.scrollIntoView({ block: 'nearest' });
+
+        if (document.activeElement !== this.searchInput) {
+            selectedItem.focus();
+        }
     }
 }
 
