@@ -223,8 +223,8 @@ class SearchModal {
 
         if (
             (event.key === 'k' && (event.ctrlKey || event.metaKey)) ||
-            (event.key === 'p' && (event.ctrlKey || event.metaKey)) ||
-            (event.key === 'f' && (event.ctrlKey || event.metaKey))
+            (event.key === 'p' && (event.ctrlKey || event.metaKey))
+            //(event.key === 'f' && (event.ctrlKey || event.metaKey))
         ) {
             if (document.activeElement === this.searchInput) return;
 

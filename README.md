@@ -24,6 +24,4 @@ You can view the documentation for this project [here](https://kellojo.github.io
 - Support infinite folder nesting (currently only supports folders on the root level)
 - Switch to async fs functions and process pages in parallel
 - Switch to a css preprocessor like SASS/LESS
-- Add a search function (?)
-    - Highlight search terms in results
 - Init script
