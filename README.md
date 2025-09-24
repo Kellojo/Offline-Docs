@@ -23,5 +23,4 @@ You can view the documentation for this project [here](https://kellojo.github.io
 - Support dark and light mode (currently only supports dark mode)
 - Support infinite folder nesting (currently only supports folders on the root level)
 - Switch to async fs functions and process pages in parallel
-- Switch to a css preprocessor like SASS/LESS
 - Init script

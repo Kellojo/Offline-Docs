@@ -1,26 +1,26 @@
 .searchOverlay {
     align-items: start;
     padding: calc(var(--pagePadding) + var(--headerHeight)) var(--pagePadding);
-}
 
-.searchOverlay:focus-visible {
-    outline: none;
-}
+    &:focus-visible {
+        outline: none;
+    }
 
-.searchOverlay form {
-    width: 75%;
-    max-width: 750px;
-    border-radius: var(--pico-border-radius);
-    padding: 1rem;
-    box-sizing: border-box;
-    height: 100%;
+    form {
+        width: 75%;
+        max-width: 750px;
+        border-radius: var(--pico-border-radius);
+        padding: 1rem;
+        box-sizing: border-box;
+        height: 100%;
 
-    display: flex;
-    flex-direction: column;
-}
+        display: flex;
+        flex-direction: column;
+    }
 
-.searchOverlay input {
-    flex-shrink: 0;
+    input {
+        flex-shrink: 0;
+    }
 }
 
 .searchResults {
@@ -43,28 +43,30 @@
     border: var(--pico-border-width) solid transparent;
 
     cursor: pointer;
-}
-.searchResultItem > h3 {
-    margin-bottom: 0.5rem;
-}
-.searchResultItem > p {
-    margin-bottom: 0;
-}
 
-.searchResultItem:focus,
-.searchResultItem:focus-visible,
-.searchResultItem:hover,
-.searchResultItem.selected {
-    background-color: var(--pico-primary-focus);
-    border-color: var(--pico-form-element-active-border-color);
-    outline: none;
-
-    > p {
-        color: var(--pico-secondary-inverse);
+    > h3 {
+        margin-bottom: 0.5rem;
     }
 
-    h3 {
-        color: var(--pico-secondary-inverse);
+    > p {
+        margin-bottom: 0;
+    }
+
+    &:focus,
+    &:focus-visible,
+    &:hover,
+    &.selected {
+        background-color: var(--pico-primary-focus);
+        border-color: var(--pico-form-element-active-border-color);
+        outline: none;
+
+        > p {
+            color: var(--pico-secondary-inverse);
+        }
+
+        h3 {
+            color: var(--pico-secondary-inverse);
+        }
     }
 }
 
@@ -77,4 +79,10 @@
     background-size: 1rem auto;
     background-repeat: no-repeat;
     color: var(--pico-text-color);
+}
+
+@media only screen and (max-width: 900px) {
+    .searchButton {
+        display: none;
+    }
 }

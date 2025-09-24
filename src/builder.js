@@ -206,6 +206,12 @@ class DocsBuilder {
         const cssFiles = new Set([
             './src/page/style.css',
             './src/page/styles/search.sass',
+            './src/page/styles/navbar.sass',
+            './src/page/styles/boxshadow.sass',
+            './src/page/styles/mdcontent.sass',
+            './src/page/styles/header.sass',
+            './src/page/styles/page.sass',
+            './src/page/styles/variables.sass',
             picoStylesheet,
         ]);
 

@@ -1,0 +1,112 @@
+body nav {
+    margin-top: var(--pagePadding);
+    background-color: var(--navBarBackground);
+    border: 0.5rem solid var(--navBarBackground);
+    padding-right: 0.5rem;
+    border-radius: var(--pico-border-radius);
+    width: 100%;
+    box-sizing: border-box;
+    height: fit-content;
+
+    height: calc(100vh - var(--headerHeight) - var(--pagePadding) * 2);
+    overflow: auto;
+    position: sticky;
+    top: calc(var(--headerHeight) + var(--pagePadding));
+
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.2s;
+}
+
+body nav:hover {
+    scrollbar-color: var(--pico-secondary-border) transparent;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin: 0 !important;
+}
+
+.navBarItem {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    cursor: pointer;
+    border-radius: var(--pico-border-radius);
+    color: var(--pico-h3-color);
+    transition: background-color 0.2s;
+}
+
+.navBarItem:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.navBarItem:not(.submenuHeader):not(.navBarItemSelected):hover,
+.navBarItem:not(.submenuHeader):not(.navBarItemSelected):focus {
+    background-color: var(--pico-primary-focus);
+    outline: none;
+}
+
+.navBarItemSelected {
+    color: var(--pico-secondary-inverse);
+    background-color: var(--pico-primary-underline);
+}
+
+.navBarItem.submenuHeader {
+    font-weight: bold;
+    color: var(--pico-h2-color);
+
+    border-bottom: 1px solid var(--pico-secondary-border);
+    border-radius: 0px;
+    cursor: default;
+}
+
+.navBarItem.submenuHeader:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.mobileMenuButton {
+    width: 2rem;
+    height: 2rem;
+    color: var(--pico-h3-color);
+    margin-right: 1rem;
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+    body nav {
+        position: fixed;
+        margin: 0;
+        top: var(--headerHeight);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        border-radius: 0;
+        padding: 0;
+        transition: left 0.2s;
+        border-width: var(--pagePadding);
+
+        &.mobileHidden {
+            left: -100%;
+        }
+    }
+
+    .mobileMenuButton {
+        display: block;
+
+        &.active .openIcon {
+            display: none;
+        }
+
+        &.active .closeIcon {
+            display: block;
+        }
+
+        .closeIcon {
+            display: none;
+        }
+    }
+
+}

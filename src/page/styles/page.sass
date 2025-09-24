@@ -1,0 +1,50 @@
+
+
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    overflow: overlay;
+    overflow-x: hidden;
+    scrollbar-color: var(--pico-secondary-border) transparent;
+}
+
+
+
+.mainContent {
+    display: grid;
+    grid-template-columns: minmax(var(--navBarWidth), var(--navBarWidth)) auto;
+    max-width: var(--maxContentWidth);
+    margin: 0 auto;
+    padding-left: var(--pagePadding);
+}
+
+main {
+    overflow: hidden;
+    padding: var(--pagePadding);
+}
+
+main *:focus-visible {
+    outline: none;
+}
+
+@media only screen and (max-width: 900px) {
+    :root {
+        --pagePadding: 1rem;
+
+        scrollbar-gutter: initial;
+    }
+
+    main {
+        width: 100vw;
+    }
+
+    .mainContent {
+        padding-left: 0;
+    }
+
+    .headerContentRight {
+        display: none;
+    }
+}

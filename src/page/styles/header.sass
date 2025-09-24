@@ -1,0 +1,31 @@
+header {
+    padding: 0 !important;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+    backdrop-filter: blur(1rem);
+    background-color: #13171fbd;
+    position: sticky;
+    top: 0;
+    height: var(--headerHeight);
+}
+
+.headerContent {
+    padding: 1rem var(--pagePadding);
+    box-sizing: border-box;
+    max-width: var(--maxContentWidth);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.headerContent h1 {
+    margin: 0px;
+    font-size: 1.5rem;
+}
+
+.headerContentRight {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
