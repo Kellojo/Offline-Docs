@@ -19,7 +19,5 @@ order: 1
 Add a metadata.yaml file to your folder, which contains the metadata:
 
 ```yaml
----
 order: 1
----
 ```
